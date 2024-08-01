@@ -1,13 +1,30 @@
+import re
 import random
 
 password = ''
 size = None
-alphabet = 'abcdefghijklmnopqrstuvwxyz'
+#alphabet = 'abcdefghijklmnopqrstuvwxyz'
+chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%&*()'  #(0, 26) Only Letters | 27, 37 Only Numbers | (38, ...) Only Symbols
+symbols = ''
 #numbers = (0,1,2,3,4,5,6,7,8,9)
 
+#options
+enableNumbers = True
+enableSymbols = True
+
 def pickRandomLetter():
-    randomCharIndex = random.randrange(0, 26)
-    return alphabet[randomCharIndex]
+    if enableNumbers and enableSymbols == False:
+        randomCharIndex = random.randrange(0, 26)
+        return chars[randomCharIndex]
+    elif enableNumbers == True and enableSymbols == False:
+        randomCharIndex = random.randrange(0, 36)
+        return chars[randomCharIndex]
+    elif enableNumbers == False and enableSymbols == True:
+        randomCharIndex = random.randrange(0, 26) + random.randrange(38, 46)
+        return chars[randomCharIndex]
+    elif enableNumbers and enableSymbols == True:
+        randomCharIndex = random.randrange(0, 46)
+        return chars[randomCharIndex]
 
 def generator():
     global password
