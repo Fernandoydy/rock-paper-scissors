@@ -1,6 +1,7 @@
-import re
+#import re
 import random
 
+input = input()
 password = ''
 size = None
 #alphabet = 'abcdefghijklmnopqrstuvwxyz'
@@ -26,7 +27,7 @@ def pickRandomLetter():
         randomCharIndex = random.randrange(0, 46)
         return chars[randomCharIndex]
 
-def generator():
+def Generator():
     global password
     while len(password) < size:
         randomChar = pickRandomLetter()
@@ -34,21 +35,26 @@ def generator():
         if len(password) == size:
             break
 
-# START
-input = int(input("Choose the password size (8-72)\n"))
+def Configurator():
+    input = int(input("Choose the password size (8-72)\n"))
+    global size
+    #Set to 8 if less
+    if input < 8:
+        size = 8
+        print("The min size is 8 chars\n ")
+    #Set to 72 if greater
+    elif input > 72:
+        size = 72
+        print("The max size is 72 characters.")
+    else:
+        size = input
+    print(f"Password size: {size}\n")
 
-#Set to 8 if less
-if input < 8:
-    size = 8
-    print("The min size is 8 chars\n ")
-#Set to 72 if greater
-elif input > 72:
-    size = 72
-    print("The max size is 72 characters.")
-else:
-    size = input
+def Start():
+    Configurator()
+    Generator()
 
-print(f"The password size is: {size}\n")
+### START ###
+Start()
 
-generator()
 print(f"Your password is: {password}")
